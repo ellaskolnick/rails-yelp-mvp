@@ -1,0 +1,2 @@
+module ResterauntsHelper
+end

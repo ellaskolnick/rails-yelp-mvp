@@ -1,0 +1,33 @@
+<div class="container">
+  <h2><%= @restaurant.name %></h2>
+
+  <ul>
+    <li>Address: <%= @restaurant.address %></li>
+    <li>Phone Number: <%= @restaurant.phone_number %></li>
+    <li>Category: <%= @restaurant.category.capitalize %></li>
+  </ul>
+  <br>
+  <%= link_to "Add Review", '#add' %>
+  <br>
+  <%= link_to 'Back', restaurants_path %>
+  <br>
+  <br>
+  <% if @restaurant.reviews.empty? %>
+    <h3>There are no reviews for <%= @restaurant.name %> yet.</h3>
+  <% else %>
+    <h2>Reviews</h2>
+    <% @restaurant.reviews.each do |review| %>
+      <li><%= review.content %> - <%= review.rating %>/5</li>
+      <%= link_to "Remove", restaurant_review_path(@restaurant, review), method: :delete, data: { confirm: "Are you sure?" } %>
+    <% end %>
+  <% end %>
+  <br>
+  <br>
+  <div id="add">
+    <%= simple_form_for [@restaurant, @new_review] do |f| %>
+      <%= f.input :rating %>
+      <%= f.input :content %>
+      <%= f.button :submit, class: "btn btn-primary"%>
+    <% end %>
+  </div>
+</div>
