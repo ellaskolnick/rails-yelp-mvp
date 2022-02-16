@@ -11,7 +11,8 @@ class ReviewsController < ApplicationController
     if @review.save
       redirect_to @restaurant, notice: 'Review Posted'
     else
-      render 'restaurants/show'
+      # render 'restaurants/show'
+      render :new
     end
   end
 
