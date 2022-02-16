@@ -1,9 +1,9 @@
 <div class="container">
   <h2>Restaurants</h2>
   <br>
-  <ul>
+  <ul class="list-unstyled">
     <% @restaurants.each do |restaurant| %>
-    <li><%= link_to restaurant.name, restaurant_path(restaurant.id) %></li>
+    <li><%= link_to restaurant.name, restaurant_path(restaurant.id), class: "text-decoration-none" %></li>
     <% end %>
   </ul>
 </div>

@@ -1,29 +1,27 @@
 <div class="container">
   <h2><%= @restaurant.name %></h2>
 
-  <ul>
+  <ul class="list-unstyled">
     <li>Address: <%= @restaurant.address %></li>
     <li>Phone Number: <%= @restaurant.phone_number %></li>
     <li>Category: <%= @restaurant.category.capitalize %></li>
   </ul>
-  <br>
   <%# <%= link_to "Add Review", new_restaurant_review_path(@restaurant) %>
-  <%= link_to "Add Review", '#add' %>
-  <br>
-  <%= link_to 'Back', restaurants_path %>
+  <%= link_to "Add Review", '#add', class: "text-decoration-none" %>
   <br>
   <br>
   <% if @restaurant.reviews.empty? %>
-    <h3>There are no reviews for <%= @restaurant.name %> yet.</h3>
+    <h4>There are no reviews for <%= @restaurant.name %> yet.</h4>
   <% else %>
     <h2>Reviews</h2>
-    <% @restaurant.reviews.each do |review| %>
-      <li><%= review.content %> - <%= review.rating %>/5</li>
-      <%= link_to "Remove", restaurant_review_path(@restaurant, review), method: :delete, data: { confirm: "Are you sure?" } %>
-    <% end %>
+    <ul class="list-unstyled">
+      <% @restaurant.reviews.each do |review| %>
+        <li><%= review.content %> - <%= review.rating %>/5</li>
+        <%= link_to "Remove", restaurant_review_path(@restaurant, review), method: :delete, data: { confirm: "Are you sure?" }, class: "text-decoration-none fw-lighter" %>
+      <% end %>
+    </ul>
   <% end %>
-  <br>
-  <br>
+  <h5>Add Review:</h5>
   <div id="add">
     <%= simple_form_for [@restaurant, @new_review] do |f| %>
       <%= f.input :rating %>
@@ -31,4 +29,8 @@
       <%= f.button :submit, class: "btn btn-primary"%>
     <% end %>
   </div>
+  <br>
+  <%= link_to 'Back', restaurants_path, class: "text-decoration-none" %>
+  <br>
+  <br>
 </div>
